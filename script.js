@@ -7,6 +7,7 @@ const keyboard = document.createElement('div');
 div.className = 'container';
 title.className = 'title';
 textarea.className = 'textarea';
+textarea.setAttribute('autofocus', 'true');
 keyboard.className = 'keyboard';
 
 title.innerHTML = "RSS Virtual Keyboard";
@@ -118,11 +119,16 @@ document.addEventListener('keyup', function (event) {
         caseUpRus.forEach(el => el.classList.remove('registr'));
     }
 })
-keyboard.addEventListener('mousedown', () => {
-  let element = '';
-    if (event.target.className === 'keyboard' || event.target.className === 'row') return;
-    else {
-        element = event.target;
-        textarea.value += element.innerText;
-    }
+keyboard.addEventListener('mousedown', function (event) {
+    let element = '';
+        if (event.target.className === 'keyboard' || event.target.className === 'row') return;
+        else {
+            element = event.target;
+            if (element.innerText === 'space') {
+                textarea.value += ' ';
+            }
+            else {
+                textarea.value += element.innerText;
+            }
+        }
 });
