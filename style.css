@@ -22,9 +22,6 @@
 .button span {
     display: none;
 }
-.button.active {
-    background: red;
-}
 .row {
     clear: both;
     width: 100%;

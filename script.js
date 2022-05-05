@@ -51,6 +51,13 @@ const keyboardRussianShift = [
   ['shift', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', ',', '▲', 'shift'],
   ['ctrl', 'win', 'alt', 'space', 'alt', '◄', '▼', '►', 'ctrl']
 ];
+const keyboardRussianCaps = [
+  ['Ё', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'backspace'],
+  ['tab', 'Й', 'Ц', 'У', 'К', 'Е', 'Н', 'Г', 'Ш', 'Щ', 'З', 'Х', 'Ъ', '\\', 'del'],
+  ['capsLock', 'Ф', 'Ы', 'В', 'А', 'П', 'Р', 'О', 'Л', 'Д', 'Ж', 'Э', 'enter'],
+  ['shift', 'Я', 'Ч', 'С', 'М', 'И', 'Т', 'Ь', 'Б', 'Ю', '.', '▲', 'shift'],
+  ['ctrl', 'win', 'alt', 'space', 'alt', '◄', '▼', '►', 'ctrl']
+];
 
 for (let i = 0; i < keyboardEnglish.length; i++) {
     const row = document.createElement('div');
@@ -81,13 +88,6 @@ for (let i = 0; i < keyboardEnglish.length; i++) {
     }
 keyboard.append(row);
 }
-keyboard.addEventListener('mousedown', function (event) {
-    event.path[0].classList.add('active');
-})
-keyboard.addEventListener('mouseup', function (event) {
-    event.path[0].classList.remove('active');
-})
-
 let caseDownEng = document.querySelectorAll('.caseDownEng');
 let caseUpEng = document.querySelectorAll('.caseUpEng');
 let caseDownRus = document.querySelectorAll('.caseDownRus');
@@ -118,3 +118,11 @@ document.addEventListener('keyup', function (event) {
         caseUpRus.forEach(el => el.classList.remove('registr'));
     }
 })
+keyboard.addEventListener('mousedown', () => {
+  let element = '';
+    if (event.target.className === 'keyboard' || event.target.className === 'row') return;
+    else {
+        element = event.target;
+        textarea.value += element.innerText;
+    }
+});
