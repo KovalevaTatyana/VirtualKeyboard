@@ -159,3 +159,17 @@ keyboard.addEventListener('mouseup', function (event) {
         }
         element.classList.remove('hover');
 });
+
+
+const description = document.createElement('p');
+const language = document.createElement('p');
+
+description.className = 'description';
+language.className = 'language';
+
+
+description.innerHTML = "Клавиатура создана в операционной системе Windows";
+language.innerHTML = "Для переключения языка - комбинация: ctrl + alt";
+
+div.appendChild(description);
+div.appendChild(language);
