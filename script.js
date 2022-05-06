@@ -69,23 +69,31 @@ for (let i = 0; i < keyboardEnglish.length; i++) {
         const caseUpEng = document.createElement('span');
         const caseDownRus = document.createElement('span');
         const caseUpRus = document.createElement('span');
+        const caseEngCaps = document.createElement('span');
+        const caseRusCaps = document.createElement('span');
 
         button.className = 'button';
         caseDownEng.className = 'caseDownEng';
         caseUpEng.className = 'caseUpEng';
         caseDownRus.className = 'caseDownRus';
         caseUpRus.className = 'caseUpRus';
+        caseEngCaps.className = 'caseEngCaps';
+        caseRusCaps.className = 'caseRusCaps';
 
         caseDownEng.innerHTML = `${keyboardEnglish[i][j]}`;
         caseUpEng.innerHTML = `${keyboardEnglishShift[i][j]}`;
         caseDownRus.innerHTML = `${keyboardRussian[i][j]}`;
         caseUpRus.innerHTML = `${keyboardRussianShift[i][j]}`;
+        caseEngCaps.innerHTML = `${keyboardEnglishCaps[i][j]}`;
+        caseRusCaps.innerHTML = `${keyboardRussianCaps[i][j]}`;
 
         row.append(button);
         button.append(caseDownEng);
         button.append(caseUpEng);
         button.append(caseDownRus);
         button.append(caseUpRus);
+        button.append(caseEngCaps);
+        button.append(caseRusCaps);
     }
 keyboard.append(row);
 }
@@ -93,15 +101,20 @@ let caseDownEng = document.querySelectorAll('.caseDownEng');
 let caseUpEng = document.querySelectorAll('.caseUpEng');
 let caseDownRus = document.querySelectorAll('.caseDownRus');
 let caseUpRus = document.querySelectorAll('.caseUpRus');
+let caseEngCaps = document.querySelectorAll('.caseEngCaps');
+let caseRusCaps = document.querySelectorAll('.caseRusCaps');
     caseDownEng.forEach(el => el.classList.add('layout'));
     caseDownEng.forEach(el => el.classList.add('registr'));
     caseDownRus.forEach(el => el.classList.add('registr'));
     caseUpEng.forEach(el => el.classList.add('layout'));
+    caseUpRus.forEach(el => el.classList.add('layout'));
+
 document.addEventListener('keydown', function (event) {
     if (event.shiftKey) {
-        caseDownEng.forEach(el => el.classList.remove('registr'));
-        caseDownRus.forEach(el => el.classList.remove('registr'));
-        caseUpEng.forEach(el => el.classList.add('registr'));
+        caseDownEng.forEach(el => el.classList.toggle('registr'));
+        caseUpEng.forEach(el => el.classList.toggle('registr'));
+        caseDownRus.forEach(el => el.classList.toggle('layout'));
+        caseUpRus.forEach(el => el.classList.toggle('layout'));
         caseUpRus.forEach(el => el.classList.add('registr'));
     }
     if (event.ctrlKey && event.altKey) {
@@ -110,12 +123,20 @@ document.addEventListener('keydown', function (event) {
         caseUpEng.forEach(el => el.classList.toggle('layout'));
         caseUpRus.forEach(el => el.classList.toggle('layout'));
     }
+    if (event.key === 'CapsLock') {
+        caseDownEng.forEach(el => el.classList.toggle('registr'));
+        caseUpEng.forEach(el => el.classList.toggle('registr'));
+        caseDownRus.forEach(el => el.classList.toggle('layout'));
+        caseUpRus.forEach(el => el.classList.toggle('layout'));
+        caseUpRus.forEach(el => el.classList.add('registr'));
+    }
 })
 document.addEventListener('keyup', function (event) {
-    if (!event.shiftKey) {
-        caseDownEng.forEach(el => el.classList.add('registr'));
-        caseDownRus.forEach(el => el.classList.add('registr'));
-        caseUpEng.forEach(el => el.classList.remove('registr'));
+    if (event.key !== 'CapsLock') {
+        caseDownEng.forEach(el => el.classList.toggle('registr'));
+        caseUpEng.forEach(el => el.classList.toggle('registr'));
+        caseDownRus.forEach(el => el.classList.toggle('layout'));
+        caseUpRus.forEach(el => el.classList.toggle('layout'));
         caseUpRus.forEach(el => el.classList.remove('registr'));
     }
 })
@@ -135,16 +156,23 @@ keyboard.addEventListener('mousedown', function (event) {
             } else if (element.innerText === 'tab') {
                 textarea.value += '\t';
             } else if (element.innerText === 'ctrl' ||
-                       element.innerText === 'capsLock' ||
+                       element.innerText === '' ||
                        element.innerText === 'alt' ||
                        element.innerText === 'win' ||
                        element.innerText === 'del') {
                 textarea.value += '';
             } else if (element.innerText === 'shift') {
                 caseDownEng.forEach(el => el.classList.toggle('registr'));
-                caseDownRus.forEach(el => el.classList.toggle('registr'));
                 caseUpEng.forEach(el => el.classList.toggle('registr'));
-                caseUpRus.forEach(el => el.classList.toggle('registr'));
+                caseDownRus.forEach(el => el.classList.toggle('layout'));
+                caseUpRus.forEach(el => el.classList.toggle('layout'));
+                caseUpRus.forEach(el => el.classList.remove('registr'));
+            } else if (element.innerText === 'capsLock') {
+                caseDownEng.forEach(el => el.classList.toggle('registr'));
+                caseUpEng.forEach(el => el.classList.toggle('registr'));
+                caseDownRus.forEach(el => el.classList.toggle('layout'));
+                caseUpRus.forEach(el => el.classList.toggle('layout'));
+                caseUpRus.forEach(el => el.classList.remove('registr'));
             } else {
                 textarea.value += element.innerText;
             }
@@ -153,11 +181,12 @@ keyboard.addEventListener('mousedown', function (event) {
 });
 keyboard.addEventListener('mouseup', function (event) {
     let element = '';
+    const button = document.querySelectorAll('.hover');
+    button.forEach((el) => el.classList.remove('hover'));
         if (event.target.className === 'keyboard' || event.target.className === 'row') return;
         else {
             element = event.target;
         }
-        element.classList.remove('hover');
 });
 
 

@@ -24,7 +24,9 @@
 .layout.registr {
     display: block;
 }
-
+.layout .caps {
+    display: block;
+}
 .button span {
     display: none;
 }
