@@ -126,9 +126,35 @@ keyboard.addEventListener('mousedown', function (event) {
             element = event.target;
             if (element.innerText === 'space') {
                 textarea.value += ' ';
-            }
-            else {
+            } else if (element.innerText === 'backspace') {
+                textarea.value = textarea.value.slice(0, -1);
+            } else if (element.innerText === 'backspace') {
+                textarea.value = textarea.value.slice(0, -1);
+            } else if (element.innerText === 'enter') {
+                textarea.value += '\n';
+            } else if (element.innerText === 'tab') {
+                textarea.value += '\t';
+            } else if (element.innerText === 'ctrl' ||
+                       element.innerText === 'capsLock' ||
+                       element.innerText === 'alt' ||
+                       element.innerText === 'win') {
+                textarea.value += '';
+            } else if (element.innerText === 'shift') {
+                caseDownEng.forEach(el => el.classList.toggle('registr'));
+                caseDownRus.forEach(el => el.classList.toggle('registr'));
+                caseUpEng.forEach(el => el.classList.toggle('registr'));
+                caseUpRus.forEach(el => el.classList.toggle('registr'));
+            } else {
                 textarea.value += element.innerText;
             }
         }
+        element.classList.add('hover');
+});
+keyboard.addEventListener('mouseup', function (event) {
+    let element = '';
+        if (event.target.className === 'keyboard' || event.target.className === 'row') return;
+        else {
+            element = event.target;
+        }
+        element.classList.remove('hover');
 });
