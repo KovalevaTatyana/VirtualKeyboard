@@ -137,7 +137,8 @@ keyboard.addEventListener('mousedown', function (event) {
             } else if (element.innerText === 'ctrl' ||
                        element.innerText === 'capsLock' ||
                        element.innerText === 'alt' ||
-                       element.innerText === 'win') {
+                       element.innerText === 'win' ||
+                       element.innerText === 'del') {
                 textarea.value += '';
             } else if (element.innerText === 'shift') {
                 caseDownEng.forEach(el => el.classList.toggle('registr'));
