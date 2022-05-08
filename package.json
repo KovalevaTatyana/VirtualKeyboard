@@ -1,0 +1,25 @@
+{
+  "name": "virtualkeyboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "dependencies": {
+    "eslint": "^8.14.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KovalevaTatyana/VirtualKeyboard.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KovalevaTatyana/VirtualKeyboard/issues"
+  },
+  "homepage": "https://github.com/KovalevaTatyana/VirtualKeyboard#readme"
+}
